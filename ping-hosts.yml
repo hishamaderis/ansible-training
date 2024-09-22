@@ -1,0 +1,5 @@
+- name: test connectivity
+  hosts: lin
+  tasks:
+   - name: Ping my hosts
+     ansible.builtin.ping:

@@ -1,0 +1,32 @@
+---
+- name: bind project
+  hosts: dns
+  collections:
+  - ansible.builtin
+  tasks:
+  - name: install bind
+    dnf:
+      name: bind
+      state: present
+
+  - name: start and enable bind
+    systemd:
+      name: named
+      enabled: true
+      state: started
+
+  - name: configure BIND
+    template:
+      src: "{{ playbook_dir }}/named.conf.j2"
+      dest: /etc/named.conf
+
+  - name: configure forward zones
+    template:
+      src: "{{ playbook_dir }}/mydomain.local.zone.j2"
+      dest: /var/named/mydomain.local.zone
+
+  - name: configure reverse zones
+    template:
+      src: "{{ playbook_dir }}/3.0.10.in-addr.arpa.zone.j2"
+      dest: /var/named/3.0.10.in-addr.arpa.zone
+

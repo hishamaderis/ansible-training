@@ -1,0 +1,18 @@
+---
+- name: installing apache web server
+  hosts:
+    web
+  collections: 
+  - ansible.builtin 
+  tasks:
+    - name: install apache2
+      apt:
+        name: apache2
+        state: present
+  tasks:
+    - name: start apache2 service
+      systemd:
+        
+
+
+

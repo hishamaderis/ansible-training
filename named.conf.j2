@@ -1,0 +1,19 @@
+acl trusted { localhost; 10.0.3.0/24; };
+options {
+  listen-on port 53 { localhost; 10.0.3.0.0/24; }; 
+  directory "/var/named";
+  allow-query { trusted; };   
+  recursion no;
+};
+
+zone "mydomain.local" IN {
+  type master;
+  file "/var/named/mydomain.local.zone";
+  allow-update { trusted };
+}
+
+zone "3.0.10.in-addr.arpa" IN {
+  type master;
+  file "/var/named/3.0.10.in-addr.arpa.zone";
+  allow-update { trusted };
+}

@@ -1,0 +1,6 @@
+- name: set hostname
+  hosts: anhosts
+  tasks:
+   - name: Set a hostname
+     ansible.builtin.hostname:
+       name: anhost1.wsmb2022.net

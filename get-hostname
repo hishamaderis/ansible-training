@@ -1,0 +1,5 @@
+- name: get hostnames
+  hosts: anhosts
+  tasks:
+   - name: get hostnames
+     ansible.builtin.command: hostname 
