@@ -5,14 +5,18 @@
   collections: 
   - ansible.builtin 
   tasks:
+    - name: update apt
+      apt:
+        update_cache: yes
     - name: install apache2
       apt:
         name: apache2
         state: present
-  tasks:
     - name: start apache2 service
       systemd:
-        
-
-
-
+        name: apache2
+        state: started
+    - name: putting in index
+      template:
+        src: "{{ playbook_dir }}/web-index.html.j2"
+        dest: /var/www/html/index.html
